@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Andi Pratama</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --bg-alt: #ffffff;
+      --text: #1a1a2e;
+      --muted: #5a5a6e;
+      --accent: #6c5ce7;
+      --accent-2: #00cec9;
+      --card: #ffffff;
+      --border: #e6e8ee;
+      --shadow: 0 10px 30px rgba(20, 20, 50, 0.08);
+    }
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --bg-alt: #161b22;
+      --text: #e6edf3;
+      --muted: #9aa4b2;
+      --accent: #a78bfa;
+      --accent-2: #2dd4bf;
+      --card: #161b22;
+      --border: #2d333b;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background .3s, color .3s;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+    /* Navbar */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .brand { font-weight: 700; font-size: 1.1rem; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a { color: var(--muted); font-size: .95rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .theme-btn {
+      background: none; border: 1px solid var(--border);
+      border-radius: 999px; padding: 6px 12px; cursor: pointer;
+      color: var(--text); font-size: 1rem;
+    }
+    .theme-btn:hover { border-color: var(--accent); }
+
+    /* Hero */
+    header.hero {
+      padding: 90px 0 70px;
+      text-align: center;
+    }
+    .avatar {
+      width: 110px; height: 110px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid; place-items: center; margin: 0 auto 22px;
+      color: #fff; font-size: 2.4rem; font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 { font-size: 2.4rem; margin-bottom: 10px; }
+    .hero h1 .wave { display: inline-block; animation: wave 2.2s infinite; transform-origin: 70% 70%; }
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      10%, 30% { transform: rotate(14deg); }
+      20% { transform: rotate(-8deg); }
+    }
+    .hero .role { color: var(--accent); font-weight: 600; font-size: 1.1rem; }
+    .hero p.subtitle { color: var(--muted); margin-top: 14px; max-width: 560px; margin-inline: auto; }
+    .cta {
+      margin-top: 28px; display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    }
+    .btn {
+      padding: 12px 22px; border-radius: 999px; font-weight: 600;
+      border: 1px solid transparent; cursor: pointer; transition: transform .15s, background .2s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost { border-color: var(--border); background: transparent; color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Sections */
+    section { padding: 60px 0; }
+    .section-title { font-size: 1.6rem; margin-bottom: 8px; }
+    .section-title small { color: var(--accent); font-size: .85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .section-sub { color: var(--muted); margin-bottom: 32px; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+    .about-grid p { color: var(--muted); }
+    .stats { display: flex; gap: 26px; margin-top: 22px; }
+    .stat .num { font-size: 1.6rem; font-weight: 700; color: var(--text); }
+    .stat .label { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+
+    /* Skills */
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      padding: 8px 14px; border-radius: 999px;
+      background: var(--card); border: 1px solid var(--border);
+      font-size: .9rem; transition: all .2s;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* Projects */
+    .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px; box-shadow: var(--shadow);
+      transition: transform .2s;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card .emoji { font-size: 1.8rem; }
+    .card h3 { margin: 12px 0 6px; font-size: 1.1rem; }
+    .card p { color: var(--muted); font-size: .92rem; }
+    .card .tags { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .card .tag { font-size: .72rem; padding: 3px 8px; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); }
+    .card .link { margin-top: 14px; display: inline-block; color: var(--accent); font-size: .85rem; font-weight: 600; }
+
+    /* Contact */
+    .contact-box {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 18px; padding: 40px; text-align: center; color: #fff;
+    }
+    .contact-box h2 { font-size: 1.6rem; margin-bottom: 8px; }
+    .contact-box p { opacity: .9; margin-bottom: 22px; }
+    .contact-box .btn { background: #fff; color: var(--accent); }
+
+    footer { padding: 30px 0; text-align: center; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--border); }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.9rem; }
+      .nav-links a:not(.theme-btn) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">Andi<span>.</span>dev</div>
+      <div class="nav-links">
+        <a href="#about">Tentang</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Proyek</a>
+        <a href="#contact">Kontak</a>
+        <button class="theme-btn" id="themeBtn" title="Ganti tema">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="avatar" id="avatar">AP</div>
+      <h1>Halo, saya Andi <span class="wave">👋</span></h1>
+      <div class="role" id="role">Full-Stack Developer</div>
+      <p class="subtitle" id="subtitle">Membangun aplikasi web yang cepat, rapi, dan ramah pengguna.</p>
+      <div class="cta">
+        <a href="#projects" class="btn btn-primary">Lihat Proyek</a>
+        <a href="#contact" class="btn btn-ghost">Hubungi Saya</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-title"><small>Tentang</small><br />Sedikit tentang saya</div>
+      <p class="section-sub">Developer yang suka belajar hal baru dan menyelesaikan masalah lewat kode.</p>
+      <div class="about-grid">
+        <div>
+          <p id="aboutText">Saya seorang developer dengan fokus pada pembuatan aplikasi web modern. Saya menikmati proses dari ide menjadi produk yang benar-benar dipakai orang.</p>
+          <div class="stats">
+            <div class="stat"><div class="num" id="statYears">3+</div><div class="label">Tahun</div></div>
+            <div class="stat"><div class="num" id="statProjects">20+</div><div class="label">Proyek</div></div>
+            <div class="stat"><div class="num" id="statClients">12+</div><div class="label">Klien</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="skills" id="skills"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-title"><small>Proyek</small><br />Beberapa karya terpilih</div>
+      <p class="section-sub">Contoh proyek yang di-generate random setiap kali halaman dimuat.</p>
+      <div class="projects" id="projectList"></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <h2>Punya proyek menarik?</h2>
+        <p>Saya selalu terbuka untuk kolaborasi dan ide baru.</p>
+        <a href="mailto:andi@example.com" class="btn">Email Saya</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Andi Pratama · Dibuat dengan ❤ menggunakan HTML, CSS &amp; JS</div>
+  </footer>
+
+  <script>
+    // ===== Data contoh (random pool) =====
+    const roles = ["Full-Stack Developer", "Frontend Engineer", "Web Developer", "JavaScript Enthusiast", "UI/UX Lover"];
+    const subtitles = [
+      "Membangun aplikasi web yang cepat, rapi, dan ramah pengguna.",
+      "Mengubah ide menjadi produk digital yang nyata.",
+      "Menulis kode bersih dan antarmuka yang manusiawi.",
+      "Fokus pada performa, aksesibilitas, dan detail kecil."
+    ];
+    const abouts = [
+      "Saya seorang developer dengan fokus pada pembuatan aplikasi web modern. Saya menikmati proses dari ide menjadi produk yang benar-benar dipakai orang.",
+      "Saya percaya kode yang baik adalah kode yang mudah dibaca dan dipelihara. Selain ngoding, saya suka mengeksplorasi tool dan tren teknologi terbaru.",
+      "Saya suka menyelesaikan masalah lewat teknologi. Sibuk dengan web, kadang mainan dengan otomatisasi dan data."
+    ];
+    const allSkills = ["HTML","CSS","JavaScript","TypeScript","React","Vue","Node.js","Express","Next.js","Tailwind","Sass","MongoDB","PostgreSQL","Git","Docker","Figma","Python","GraphQL","Vite","Jest"];
+
+    const projectPool = [
+      { emoji: "🛒", title: "Toko Online", desc: "Platform e-commerce dengan keranjang belanja dan pembayaran.", tags: ["React","Node","Stripe"] },
+      { emoji: "📝", title: "Aplikasi Catatan", desc: "Catatan pribadi dengan sinkronisasi realtime dan tag.", tags: ["Vue","Firebase"] },
+      { emoji: "📊", title: "Dashboard Analitik", desc: "Visualisasi data penjualan dengan grafik interaktif.", tags: ["Next.js","Chart.js"] },
+      { emoji: "💬", title: "Chat App", desc: "Aplikasi pesan realtime dengan ruang grup.", tags: ["Socket.io","Express"] },
+      { emoji: "🌤️", title: "Cuaca Hari Ini", desc: "Cek cuaca kota dengan prediksi 7 hari ke depan.", tags: ["JavaScript","API"] },
+      { emoji: "🍔", title: "Food Delivery", desc: "Pemesanan makanan dengan pelacakan lokasi kurir.", tags: ["React","Mapbox"] },
+      { emoji: "📚", title: "Perpustakaan Digital", desc: "Katalog buku dengan fitur peminjaman online.", tags: ["Next.js","Prisma"] },
+      { emoji: "🏋️", title: "Fitness Tracker", desc: "Pencatat latihan dan progres harian.", tags: ["React","IndexedDB"] },
+      { emoji: "🎵", title: "Music Player", desc: "Pemutar musik dengan playlist dan lirik.", tags: ["JavaScript","Web Audio"] },
+      { emoji: "📅", title: "Jadwal Kuliah", desc: "Pengelola jadwal kuliah dengan reminder.", tags: ["Vue","LocalStorage"] },
+      { emoji: "📸", title: "Galeri Foto", desc: "Galeri dengan filter dan tampilan lightbox.", tags: ["CSS Grid","JS"] },
+      { emoji: "💼", title: "Job Finder", desc: "Pencari lowongan kerja dengan filter cerdas.", tags: ["React","Node"] }
+    ];
+
+    // ===== Helper random =====
+    const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+    const sample = (arr, n) => [...arr].sort(() => Math.random() - 0.5).slice(0, n);
+
+    // ===== Isi konten random =====
+    document.getElementById("role").textContent = pick(roles);
+    document.getElementById("subtitle").textContent = pick(subtitles);
+    document.getElementById("aboutText").textContent = pick(abouts);
+    document.getElementById("statYears").textContent = (2 + Math.floor(Math.random() * 6)) + "+";
+    document.getElementById("statProjects").textContent = (10 + Math.floor(Math.random() * 30)) + "+";
+    document.getElementById("statClients").textContent = (5 + Math.floor(Math.random() * 20)) + "+";
+
+    // Skills random
+    const skillsEl = document.getElementById("skills");
+    sample(allSkills, 9).forEach(s => {
+      const chip = document.createElement("div");
+      chip.className = "chip";
+      chip.textContent = s;
+      skillsEl.appendChild(chip);
+    });
+
+    // Projects random
+    const projectsEl = document.getElementById("projectList");
+    sample(projectPool, 6).forEach(p => {
+      const card = document.createElement("div");
+      card.className = "card reveal";
+      card.innerHTML = `
+        <div class="emoji">${p.emoji}</div>
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+        <a class="link" href="#">Lihat detail →</a>
+      `;
+      projectsEl.appendChild(card);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ===== Theme toggle =====
+    const themeBtn = document.getElementById("themeBtn");
+    const setTheme = (t) => {
+      document.documentElement.setAttribute("data-theme", t);
+      themeBtn.textContent = t === "dark" ? "☀️" : "🌙";
+      localStorage.setItem("theme", t);
+    };
+    setTheme(localStorage.getItem("theme") || "light");
+    themeBtn.addEventListener("click", () => {
+      setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+    });
+
+    // ===== Reveal on scroll =====
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal, section .card").forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
